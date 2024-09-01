@@ -1,23 +1,78 @@
-# cmake-conan-template
+# compile time type based schema declaration
 
-Thats is a small template to quick start a new cmake project with a lot features such as 
+Define xml/json or other type-based schema. Everything is defined at compile time.
 
-- many build and configure customization points
-- examples for static/shared lib and interface lib
-- installation rules
-- test for fetch content and conan packaging
-- targets for 
-    * building
-    * examples
-    * testing
-    * linting
-    * formatting
-- static analyzers 
-- doxygen
-- possible cpm predownload script as opposite to conan package manager
+The interesting features are 
+- tagging occurrences/trees/arrays using strings and non-complete types
+- possibility to set a restriction on occurrences separately from the definition itself via traits
 
+# How to
 
-# quick start
+Below is example of how to declare type which represents following xml structure
 
-Change schemapp -> to your project name and start to develop
+```xml
+<MainTree>
+    <CommonValue>10</CommonValue>
+    <InnerTree>
+        <Value>42</Value>
+        <SomeTag>awesome tag</SomeTag>
+    </<InnerTree>>
+    <SomeArray>
+        <Complex>
+            <Imaginary>42.12</Imaginary>
+        </Complex>
+        <Complex>
+            <Real>3</Real>
+        </Complex>
+        <Complex>
+            <Real>12</Real>
+            <Imaginary>42.12</Imaginary>
+        </Complex>
+    </SomeArray>
+</MainTree>
+```
 
+for c++ code it will be looks like
+
+```cpp
+#include <schemapp/schemapp.hpp>
+
+using namespace schemapp;
+using namespace schemapp::literals;
+
+// separated from main definition for readability
+using common_value_node = entry<struct CommonValueNodeTag, "CommonValue"_fs>;
+
+// thats too
+using complex_node = tree<struct ComplexNodetag, "Complex"_fs,
+                        entry<struct Re, "Real"_fs>,
+                        entry<struct Im, "Imaginary"_fs>>;
+
+using representation =
+    tree<struct MainTreeTag, "MainTree"_fs,
+        common_value_node
+        tree<struct ComplexNodetag, "Complex"_fs,  // can be declared inside
+                        entry<struct Re, "Real"_fs>,
+                        entry<struct Im, "Imaginary"_fs>>,
+        array<struct SomeArrayTag, "SomeArray"_fs, complex_node>>;
+```
+
+Tags can be either incomplete structures or complete structures, this can be used to more clearly show e.g. the structure of a config and its schema.
+
+```cpp
+struct Inner {
+    std::string path;
+}
+
+struct Config {
+    double value;
+    Inner inner;
+}
+
+using config_schema = tree<Config, "Config"_fs, 
+    entry<double, "Value"_fs>,
+    tree<Inner, "Inner"_fs, 
+        entry<std::string, "Path"_fs>>;
+```
+
+Within a single subtree, keys and tags must be unique to be able to pull internal nodes correctly

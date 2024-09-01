@@ -34,8 +34,8 @@ target_sources(${PROJECT_NAME} PRIVATE ${TEST_SOURCES})
 option(LINT_TESTS "enable static analyzers for tests" OFF)
 
 if(LINT_TESTS)
-    target_cppcheck(${PROJECT_NAME} ${WARNINGS_AS_ERRORS} "")
-    target_clangtidy(${PROJECT_NAME} ${WARNINGS_AS_ERRORS})
+    target_cppcheck(${PROJECT_NAME} "${TEST_SOURCES}")
+    target_clangtidy(${PROJECT_NAME} "${TEST_SOURCES}")
     target_include_what_you_use(${PROJECT_NAME} "${TEST_SOURCES}")
 endif()
 

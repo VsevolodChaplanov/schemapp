@@ -15,6 +15,7 @@
             ],
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "schemapp_SANITIZER_ADDRESS": "OFF",
                 "LINT_EXAMPLES": "ON",
                 "LINT_TESTS": "ON"
             }
