@@ -7,7 +7,7 @@ include(../cmake/linker.cmake)
 include(../cmake/sanitizers.cmake)
 include(../cmake/static-analyzers.cmake)
 
-set(MODULE_NAME utility)
+set(MODULE_NAME schemapp)
 set(MODULE_FULL_NAME ${MAIN_PROJECT_NAME}-${MODULE_NAME})
 
 include(cmake/options.cmake)
@@ -64,7 +64,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY EXPORT_NAME ${PROJECT_NAME})
 
 # ---- Collect sources
 
-file(GLOB LIBRARY_INCLUDES ${PROJECT_SOURCE_DIR}/include/${MAIN_PROJECT_NAME}/${MODULE_NAME}/*.hpp)
+file(GLOB_RECURSE LIBRARY_INCLUDES ${PROJECT_SOURCE_DIR}/include/${MAIN_PROJECT_NAME}/*.hpp)
 
 # ---- Set target sources
 

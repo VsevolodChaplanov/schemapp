@@ -34,15 +34,10 @@ enable_ipo()
 
 register_module(schemapp)
 
-# ---- Target to link with all library modules
-
-add_library(${PROJECT_NAME} INTERFACE)
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-target_link_libraries(${PROJECT_NAME} INTERFACE ${MODULES_REGISTRY})
-
 # ---- Install rules for project interface library
 
-include(cmake/install-rules.cmake)
+# not required for now due to only one module exist
+# include(cmake/install-rules.cmake)
 
 # ---- Developer mode ----
 

@@ -14,7 +14,9 @@
                 "conan"
             ],
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "LINT_EXAMPLES": "ON",
+                "LINT_TESTS": "ON"
             }
         },
         {
@@ -82,9 +84,7 @@
             },
             "inherits": [
                 "dev-common",
-                "ci-win64-ninja",
-                "clang-tidy",
-                "cppcheck"
+                "ci-win64-ninja"
             ],
             "environment": {
                 "UseMultiToolTask": "true",
@@ -93,7 +93,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
