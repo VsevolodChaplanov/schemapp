@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "my_project"
+name = "schemapp"
 version = "0.1.0"
 description = ""
 authors = ["VChaplanov"]

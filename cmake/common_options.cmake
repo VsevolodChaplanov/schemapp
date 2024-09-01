@@ -1,3 +1,3 @@
 set(MAIN_PROJECT_NAME
-    "my_project"
+    "schemapp"
     CACHE STRING "General project name may be reffered in submodules")

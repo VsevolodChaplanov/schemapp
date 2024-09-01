@@ -65,18 +65,18 @@ cmake --install build --config Release
 This project exports a CMake package to be used with the [`find_package`][3]
 command of CMake:
 
-* Package name: `my_project`
-* Target name: `my_project::my_project`
+* Package name: `schemapp`
+* Target name: `schemapp::schemapp`
 
 Example usage:
 
 ```cmake
-find_package(my_project REQUIRED)
+find_package(schemapp REQUIRED)
 # Declare the imported target as a build requirement using PRIVATE, where
 # project_target is a target created in the consuming project
 target_link_libraries(
     project_target PRIVATE
-    my_project::my_project
+    schemapp::schemapp
 )
 ```
 

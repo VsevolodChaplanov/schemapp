@@ -32,8 +32,7 @@ endif()
 
 enable_ipo()
 
-register_module(utility)
-register_module(core)
+register_module(schemapp)
 
 # ---- Target to link with all library modules
 
