@@ -11,7 +11,7 @@
 
 namespace schemapp {
 
-    template<typename TypeTag, static_string Tag, entry_c... Entries>
+    template<typename TypeTag, static_string Tag, c_entry... Entries>
     struct tree : public string_tagged<Tag>, type_tagged<TypeTag> {
         using entries_tuple = std::tuple<Entries...>;
 

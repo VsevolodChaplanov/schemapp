@@ -1,8 +1,6 @@
 #ifndef SCHEMAPP_CORE_TAGGED_HPP
 #define SCHEMAPP_CORE_TAGGED_HPP
 
-#include <algorithm>
-
 #include <schemapp/utility/static_string.hpp>
 
 namespace schemapp {

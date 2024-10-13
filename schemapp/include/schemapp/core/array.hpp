@@ -6,9 +6,9 @@
 #include <schemapp/utility/static_string.hpp>
 
 namespace schemapp {
-    template<typename T, static_string Tag, tree_c tree>
+    template<typename T, static_string Tag, tree_c Tree>
     struct array : public string_tagged<Tag>, public type_tagged<T> {
-        using tree_type = tree;
+        using tree_type = Tree;
     };
 } // namespace schemapp
 

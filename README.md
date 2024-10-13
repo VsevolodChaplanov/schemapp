@@ -8,6 +8,8 @@ The interesting features are
 
 # How to
 
+## Basic usage with nodes paths describes 
+
 Below is example of how to declare type which represents following xml structure
 
 ```xml
@@ -76,3 +78,16 @@ using config_schema = tree<Config, "Config"_fs,
 ```
 
 Within a single subtree, keys and tags must be unique to be able to pull internal nodes correctly
+
+## Add constraints on nodes
+
+You can set limits and constraints on values for a node.
+
+```cpp
+
+using node_with_constraints 
+    = entry<struct SomeNodeTag, "Node">::constrained<min_c<0>, 
+                                                     max_c<100>, 
+                                                     default_value_c<50>, 
+                                                     type_c<int>>;
+```

@@ -1,7 +1,6 @@
 #ifndef SCHEMAPP_UTILITY_INDEX_HPP
 #define SCHEMAPP_UTILITY_INDEX_HPP
 
-#include <concepts>
 #include <schemapp/utility/static_string.hpp>
 
 namespace schemapp {
