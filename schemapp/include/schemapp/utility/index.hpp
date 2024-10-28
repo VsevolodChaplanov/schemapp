@@ -43,21 +43,29 @@ namespace schemapp {
         }
     } // namespace detail
 
-    template<typename T>
-    concept has_type_tag_c = requires { typename T::tag_type; };
+    namespace concepts {
+        template<typename T>
+        concept has_type_tag = requires { typename T::tag_type; };
 
-    template<typename Tag, typename... TypeTagged> consteval auto index() noexcept -> size_t {
-        /// Use the helper to be able to return an index outside the pack
-        return detail::index_helper<Tag, TypeTagged..., detail::dummy_entry>();
-    }
+        template<typename T>
+        concept has_value_tag = requires { typename std::integral_constant<decltype(T::tag_value), T::tag_value>; };
+    } // namespace concepts
 
-    template<typename T>
-    concept has_value_tag_c = requires { typename std::integral_constant<decltype(T::tag_value), T::tag_value>; };
+    //    template<typename Tag, typename... TypeTagged> consteval auto index() noexcept -> size_t {
+    //        /// Use the helper to be able to return an index outside the pack
+    //        return detail::index_helper<Tag, TypeTagged..., detail::dummy_entry>();
+    //    }
+    //
+    //    template<static_string Tag, typename... StringTagged> consteval auto index() noexcept -> size_t {
+    //        /// Use the helper to be able to return an index outside the pack
+    //        return detail::index_helper<Tag, StringTagged..., detail::dummy_entry>();
+    //    }
 
-    template<static_string Tag, typename... StringTagged> consteval auto index() noexcept -> size_t {
-        /// Use the helper to be able to return an index outside the pack
-        return detail::index_helper<Tag, StringTagged..., detail::dummy_entry>();
-    }
+    template<typename Tag, typename... TypeTagged>
+    constexpr std::size_t index_tag = detail::index_helper<Tag, TypeTagged..., detail::dummy_entry>();
+
+    template<static_string Tag, typename... StringTagged>
+    constexpr std::size_t index_value = detail::index_helper<Tag, StringTagged..., detail::dummy_entry>();
 } // namespace schemapp
 
 #endif // SCHEMAPP_UTILITY_INDEX_HPP

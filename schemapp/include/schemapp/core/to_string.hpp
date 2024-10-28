@@ -14,7 +14,7 @@ namespace schemapp {
 
         constexpr static_string xsd_element = "xsd:element";
 
-        template<c_entry Entry> constexpr static_string field_name = R"(name=")" + Entry::tag_value + R"(")";
+        template<concepts::entry Entry> constexpr static_string field_name = R"(name=")" + Entry::tag_value + R"(")";
 
         template<typename Entry>
         concept has_type_name = requires {
@@ -33,7 +33,7 @@ namespace schemapp {
         template<typename Entry> constexpr static_string type_name_xml_schema_v = type_name_xml_schema<Entry>::value;
     } // namespace detail
 
-    template<c_entry Entry>
+    template<concepts::entry Entry>
     constexpr static_string entry_xml_schema_v =
         detail::xml_bra + detail::xsd_element + detail::space + detail::field_name<Entry> +
         detail::type_name_xml_schema_v<Entry> + detail::xml_ket;

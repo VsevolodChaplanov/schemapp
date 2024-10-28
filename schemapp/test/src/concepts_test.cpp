@@ -1,12 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <schemapp/core/constraints.hpp>
-#include <schemapp/core/entry.hpp>
-#include <schemapp/core/getters.hpp>
-#include <schemapp/core/to_string.hpp>
-#include <schemapp/core/tree.hpp>
-#include <schemapp/utility/index.hpp>
-#include <schemapp/utility/static_string.hpp>
 
 namespace schemapp::testing {
     struct my_test_type : public default_value_c<0>, public min_c<0> {};

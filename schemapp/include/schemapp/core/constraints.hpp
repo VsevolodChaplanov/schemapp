@@ -46,7 +46,8 @@ namespace schemapp {
         using type = Type;
     };
 
-    template<typename Entry, typename... Constraints> struct with_constraints : public Entry, public Constraints... {};
+    template<typename Entry, typename... Constraints>
+    struct with_constraints final : public Entry, public Constraints... {};
 
     namespace concepts {
         template<typename T>
